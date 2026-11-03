@@ -1,4 +1,4 @@
-import { TwitterResolverContext } from "../resolvers"
+import { TwitterResolverContext } from "./context"
 import { TweetResolvers } from "../resolvers-types.generated"
 
 const tweetTwitterResolver: TweetResolvers<TwitterResolverContext> = {
