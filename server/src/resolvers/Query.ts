@@ -1,5 +1,5 @@
 import { QueryResolvers } from "../resolvers-types.generated"
-import {TwitterResolverContext} from "../resolvers";
+import {TwitterResolverContext} from "./context";
 import { tweetTransform } from "../transforms"
 
 const queryTwitterResolvers: QueryResolvers<TwitterResolverContext>  = {

@@ -2,21 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const assert = require('assert/strict');
-const ts = require('typescript');
-require.extensions['.ts'] = function (module, filename) {
-  const result = ts.transpileModule(fs.readFileSync(filename, 'utf8'), {
-    compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020},
-    fileName: filename,
-  });
-  module._compile(result.outputText, filename);
-};
 const root = path.resolve(__dirname, '..');
 process.chdir(path.join(root, 'server'));
 const express = require('express');
 const {createServer} = require('http');
-const Db = require('../server/src/db.ts').default;
-const {seedDb} = require('../server/src/seed.ts');
-const {createApolloServer} = require('../server/src/apollo-server.ts');
+const Db = require('../server/dist/db.js').default;
+const {seedDb} = require('../server/dist/seed.js');
+const {createApolloServer} = require('../server/dist/apollo-server.js');
 const proxyaddr = require('proxy-addr');
 const quote = require('shell-quote');
 (async () => {

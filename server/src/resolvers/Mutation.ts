@@ -1,5 +1,5 @@
 import { tweetTransform } from "../transforms"
-import { TwitterResolverContext } from "../resolvers"
+import { TwitterResolverContext } from "./context"
 import { MutationResolvers } from "../resolvers-types.generated"
 
 const mutationTwitterResolver: MutationResolvers<TwitterResolverContext> = {
