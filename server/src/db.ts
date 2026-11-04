@@ -1,6 +1,6 @@
 import * as low from "lowdb";
 import * as FileSync from "lowdb/adapters/FileSync";
-import { v4 as uuid } from "uuid";
+import { randomUUID as uuid } from "node:crypto";
 
 export interface DbEntity {
   id: string;
