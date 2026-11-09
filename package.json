@@ -28,7 +28,8 @@
     "test:security": "node scripts/security-smoke.cjs",
     "test:codegen-config": "node scripts/codegen-config-smoke.cjs",
     "test:nodemon": "node scripts/nodemon-smoke.cjs",
-    "test:apollo-http": "node scripts/apollo-http-smoke.cjs"
+    "test:apollo-http": "node scripts/apollo-http-smoke.cjs",
+    "test:parcel-dev": "node scripts/parcel-dev-smoke.cjs"
   },
   "workspaces": [
     "client",
@@ -36,8 +37,8 @@
     "shared"
   ],
   "devDependencies": {
-    "@parcel/core": "^2.3.2",
-    "@parcel/transformer-sass": "^2.6.1",
+    "@parcel/core": "^2.16.4",
+    "@parcel/transformer-sass": "^2.16.4",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "concurrently": "^7.0.0",
