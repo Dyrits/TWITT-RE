@@ -1,38 +1,39 @@
+/** Internal type. DO NOT USE DIRECTLY. */
+type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+/** Internal type. DO NOT USE DIRECTLY. */
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
 };
 
 export type DeletionResult = {
   __typename?: 'DeletionResult';
-  deleted?: Maybe<Array<Scalars['String']>>;
+  deleted?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type Favorite = {
   __typename?: 'Favorite';
-  createdAt: Scalars['String'];
-  id: Scalars['String'];
+  createdAt: Scalars['String']['output'];
+  id: Scalars['String']['output'];
   tweet?: Maybe<Tweet>;
-  updatedAt: Scalars['String'];
+  updatedAt: Scalars['String']['output'];
   user?: Maybe<User>;
 };
 
 export type HashtagTrend = {
   __typename?: 'HashtagTrend';
-  hashtag: Scalars['String'];
-  tweetCount: Scalars['Int'];
+  hashtag: Scalars['String']['output'];
+  tweetCount: Scalars['Int']['output'];
 };
 
 export type Mutation = {
@@ -44,20 +45,20 @@ export type Mutation = {
 
 
 export type MutationCreateFavoriteArgs = {
-  tweetId: Scalars['String'];
-  userId: Scalars['String'];
+  tweetId: Scalars['String']['input'];
+  userId: Scalars['String']['input'];
 };
 
 
 export type MutationCreateTweetArgs = {
-  body: Scalars['String'];
-  userId: Scalars['String'];
+  body: Scalars['String']['input'];
+  userId: Scalars['String']['input'];
 };
 
 
 export type MutationDeleteFavoriteArgs = {
-  tweetId: Scalars['String'];
-  userId: Scalars['String'];
+  tweetId: Scalars['String']['input'];
+  userId: Scalars['String']['input'];
 };
 
 export type Query = {
@@ -71,38 +72,38 @@ export type Query = {
 
 
 export type QueryUserArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 export type Retweet = {
   __typename?: 'Retweet';
-  createdAt: Scalars['String'];
-  id: Scalars['String'];
+  createdAt: Scalars['String']['output'];
+  id: Scalars['String']['output'];
   tweet?: Maybe<Tweet>;
-  updatedAt: Scalars['String'];
+  updatedAt: Scalars['String']['output'];
   user?: Maybe<User>;
 };
 
 export type Suggestion = {
   __typename?: 'Suggestion';
-  avatarUrl: Scalars['String'];
-  handle: Scalars['String'];
-  name: Scalars['String'];
-  reason: Scalars['String'];
+  avatarUrl: Scalars['String']['output'];
+  handle: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  reason: Scalars['String']['output'];
 };
 
 export type TopicTrend = {
   __typename?: 'TopicTrend';
   quote?: Maybe<TopicTrendQuote>;
-  topic: Scalars['String'];
-  tweetCount: Scalars['Int'];
+  topic: Scalars['String']['output'];
+  tweetCount: Scalars['Int']['output'];
 };
 
 export type TopicTrendQuote = {
   __typename?: 'TopicTrendQuote';
-  description: Scalars['String'];
-  imageUrl: Scalars['String'];
-  title: Scalars['String'];
+  description: Scalars['String']['output'];
+  imageUrl: Scalars['String']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type Trend = HashtagTrend | TopicTrend;
@@ -110,79 +111,82 @@ export type Trend = HashtagTrend | TopicTrend;
 export type Tweet = {
   __typename?: 'Tweet';
   author?: Maybe<User>;
-  body: Scalars['String'];
-  createdAt: Scalars['String'];
+  body: Scalars['String']['output'];
+  createdAt: Scalars['String']['output'];
   favorites?: Maybe<Array<Favorite>>;
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   retweets?: Maybe<Array<Retweet>>;
   stats?: Maybe<TweetStats>;
-  updatedAt: Scalars['String'];
+  updatedAt: Scalars['String']['output'];
 };
 
 export type TweetStats = {
   __typename?: 'TweetStats';
-  commentCount: Scalars['Int'];
-  favoriteCount: Scalars['Int'];
-  retweetCount: Scalars['Int'];
+  commentCount: Scalars['Int']['output'];
+  favoriteCount: Scalars['Int']['output'];
+  retweetCount: Scalars['Int']['output'];
 };
 
 export type User = {
   __typename?: 'User';
-  avatarUrl: Scalars['String'];
-  coverUrl: Scalars['String'];
-  createdAt: Scalars['String'];
-  deletedAt?: Maybe<Scalars['String']>;
+  avatarUrl: Scalars['String']['output'];
+  coverUrl: Scalars['String']['output'];
+  createdAt: Scalars['String']['output'];
+  deletedAt?: Maybe<Scalars['String']['output']>;
   favorites?: Maybe<Array<Favorite>>;
-  handle: Scalars['String'];
-  id: Scalars['String'];
-  name: Scalars['String'];
+  handle: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
   retweets?: Maybe<Array<Retweet>>;
   stats?: Maybe<UserStats>;
   tweets?: Maybe<Array<Tweet>>;
-  updatedAt: Scalars['String'];
+  updatedAt: Scalars['String']['output'];
 };
 
 export type UserStats = {
   __typename?: 'UserStats';
-  followerCount: Scalars['Int'];
-  followingCount: Scalars['Int'];
-  tweetCount: Scalars['Int'];
+  followerCount: Scalars['Int']['output'];
+  followingCount: Scalars['Int']['output'];
+  tweetCount: Scalars['Int']['output'];
   user: User;
 };
 
 export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, handle: string, avatarUrl: string, createdAt: string, updatedAt: string, coverUrl: string, favorites?: Array<{ __typename?: 'Favorite', tweet?: { __typename?: 'Tweet', id: string } | null }> | null, stats?: { __typename?: 'UserStats', tweetCount: number, followerCount: number, followingCount: number } | null }, suggestions?: Array<{ __typename?: 'Suggestion', name: string, handle: string, avatarUrl: string, reason: string }> | null, trends?: Array<{ __typename?: 'HashtagTrend', tweetCount: number, hashtag: string } | { __typename?: 'TopicTrend', tweetCount: number, topic: string, quote?: { __typename?: 'TopicTrendQuote', title: string, imageUrl: string, description: string } | null }> | null };
+export type GetCurrentUserQuery = { currentUser: { id: string, name: string, handle: string, avatarUrl: string, createdAt: string, updatedAt: string, coverUrl: string, favorites: Array<{ tweet: { id: string } | null }> | null, stats: { tweetCount: number, followerCount: number, followingCount: number } | null }, suggestions: Array<{ name: string, handle: string, avatarUrl: string, reason: string }> | null, trends: Array<
+    | { tweetCount: number, hashtag: string }
+    | { tweetCount: number, topic: string, quote: { title: string, imageUrl: string, description: string } | null }
+  > | null };
 
 export type CreateNewTweetMutationVariables = Exact<{
-  userId: Scalars['String'];
-  body: Scalars['String'];
+  userId: string;
+  body: string;
 }>;
 
 
-export type CreateNewTweetMutation = { __typename?: 'Mutation', createTweet: { __typename?: 'Tweet', id: string } };
+export type CreateNewTweetMutation = { createTweet: { id: string } };
 
 export type GetTimelineTweetsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTimelineTweetsQuery = { __typename?: 'Query', tweets?: Array<{ __typename?: 'Tweet', id: string, body: string, createdAt: string, stats?: { __typename?: 'TweetStats', favoriteCount: number, retweetCount: number, commentCount: number } | null, favorites?: Array<{ __typename?: 'Favorite', user?: { __typename?: 'User', id: string } | null }> | null, author?: { __typename?: 'User', name: string, handle: string, avatarUrl: string } | null }> | null };
+export type GetTimelineTweetsQuery = { tweets: Array<{ id: string, body: string, createdAt: string, stats: { favoriteCount: number, retweetCount: number, commentCount: number } | null, favorites: Array<{ user: { id: string } | null }> | null, author: { name: string, handle: string, avatarUrl: string } | null }> | null };
 
 export type CreateFavoriteMutationVariables = Exact<{
-  tweetId: Scalars['String'];
-  userId: Scalars['String'];
+  tweetId: string;
+  userId: string;
 }>;
 
 
-export type CreateFavoriteMutation = { __typename?: 'Mutation', createFavorite: { __typename?: 'Favorite', tweet?: { __typename?: 'Tweet', id: string } | null, user?: { __typename?: 'User', id: string } | null } };
+export type CreateFavoriteMutation = { createFavorite: { tweet: { id: string } | null, user: { id: string } | null } };
 
 export type DeleteFavoriteMutationVariables = Exact<{
-  tweetId: Scalars['String'];
-  userId: Scalars['String'];
+  tweetId: string;
+  userId: string;
 }>;
 
 
-export type DeleteFavoriteMutation = { __typename?: 'Mutation', deleteFavorite: { __typename?: 'Favorite', tweet?: { __typename?: 'Tweet', id: string } | null, user?: { __typename?: 'User', id: string } | null } };
+export type DeleteFavoriteMutation = { deleteFavorite: { tweet: { id: string } | null, user: { id: string } | null } };
 
 
 export const GetCurrentUserDocument = gql`
@@ -253,8 +257,16 @@ export function useGetCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
         }
+// @ts-ignore
+export function useGetCurrentUserSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>): Apollo.UseSuspenseQueryResult<GetCurrentUserQuery, GetCurrentUserQueryVariables>;
+export function useGetCurrentUserSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>): Apollo.UseSuspenseQueryResult<GetCurrentUserQuery | undefined, GetCurrentUserQueryVariables>;
+export function useGetCurrentUserSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
+        }
 export type GetCurrentUserQueryHookResult = ReturnType<typeof useGetCurrentUserQuery>;
 export type GetCurrentUserLazyQueryHookResult = ReturnType<typeof useGetCurrentUserLazyQuery>;
+export type GetCurrentUserSuspenseQueryHookResult = ReturnType<typeof useGetCurrentUserSuspenseQuery>;
 export type GetCurrentUserQueryResult = Apollo.QueryResult<GetCurrentUserQuery, GetCurrentUserQueryVariables>;
 export const CreateNewTweetDocument = gql`
     mutation CreateNewTweet($userId: String!, $body: String!) {
@@ -338,8 +350,16 @@ export function useGetTimelineTweetsLazyQuery(baseOptions?: Apollo.LazyQueryHook
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>(GetTimelineTweetsDocument, options);
         }
+// @ts-ignore
+export function useGetTimelineTweetsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>): Apollo.UseSuspenseQueryResult<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>;
+export function useGetTimelineTweetsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>): Apollo.UseSuspenseQueryResult<GetTimelineTweetsQuery | undefined, GetTimelineTweetsQueryVariables>;
+export function useGetTimelineTweetsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>(GetTimelineTweetsDocument, options);
+        }
 export type GetTimelineTweetsQueryHookResult = ReturnType<typeof useGetTimelineTweetsQuery>;
 export type GetTimelineTweetsLazyQueryHookResult = ReturnType<typeof useGetTimelineTweetsLazyQuery>;
+export type GetTimelineTweetsSuspenseQueryHookResult = ReturnType<typeof useGetTimelineTweetsSuspenseQuery>;
 export type GetTimelineTweetsQueryResult = Apollo.QueryResult<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>;
 export const CreateFavoriteDocument = gql`
     mutation CreateFavorite($tweetId: String!, $userId: String!) {

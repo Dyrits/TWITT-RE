@@ -1,37 +1,34 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
 };
 
 export type DeletionResult = {
   __typename?: 'DeletionResult';
-  deleted?: Maybe<Array<Scalars['String']>>;
+  deleted?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type Favorite = {
   __typename?: 'Favorite';
-  createdAt: Scalars['String'];
-  id: Scalars['String'];
+  createdAt: Scalars['String']['output'];
+  id: Scalars['String']['output'];
   tweet?: Maybe<Tweet>;
-  updatedAt: Scalars['String'];
+  updatedAt: Scalars['String']['output'];
   user?: Maybe<User>;
 };
 
 export type HashtagTrend = {
   __typename?: 'HashtagTrend';
-  hashtag: Scalars['String'];
-  tweetCount: Scalars['Int'];
+  hashtag: Scalars['String']['output'];
+  tweetCount: Scalars['Int']['output'];
 };
 
 export type Mutation = {
@@ -43,20 +40,20 @@ export type Mutation = {
 
 
 export type MutationCreateFavoriteArgs = {
-  tweetId: Scalars['String'];
-  userId: Scalars['String'];
+  tweetId: Scalars['String']['input'];
+  userId: Scalars['String']['input'];
 };
 
 
 export type MutationCreateTweetArgs = {
-  body: Scalars['String'];
-  userId: Scalars['String'];
+  body: Scalars['String']['input'];
+  userId: Scalars['String']['input'];
 };
 
 
 export type MutationDeleteFavoriteArgs = {
-  tweetId: Scalars['String'];
-  userId: Scalars['String'];
+  tweetId: Scalars['String']['input'];
+  userId: Scalars['String']['input'];
 };
 
 export type Query = {
@@ -70,38 +67,38 @@ export type Query = {
 
 
 export type QueryUserArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 export type Retweet = {
   __typename?: 'Retweet';
-  createdAt: Scalars['String'];
-  id: Scalars['String'];
+  createdAt: Scalars['String']['output'];
+  id: Scalars['String']['output'];
   tweet?: Maybe<Tweet>;
-  updatedAt: Scalars['String'];
+  updatedAt: Scalars['String']['output'];
   user?: Maybe<User>;
 };
 
 export type Suggestion = {
   __typename?: 'Suggestion';
-  avatarUrl: Scalars['String'];
-  handle: Scalars['String'];
-  name: Scalars['String'];
-  reason: Scalars['String'];
+  avatarUrl: Scalars['String']['output'];
+  handle: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  reason: Scalars['String']['output'];
 };
 
 export type TopicTrend = {
   __typename?: 'TopicTrend';
   quote?: Maybe<TopicTrendQuote>;
-  topic: Scalars['String'];
-  tweetCount: Scalars['Int'];
+  topic: Scalars['String']['output'];
+  tweetCount: Scalars['Int']['output'];
 };
 
 export type TopicTrendQuote = {
   __typename?: 'TopicTrendQuote';
-  description: Scalars['String'];
-  imageUrl: Scalars['String'];
-  title: Scalars['String'];
+  description: Scalars['String']['output'];
+  imageUrl: Scalars['String']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type Trend = HashtagTrend | TopicTrend;
@@ -109,43 +106,43 @@ export type Trend = HashtagTrend | TopicTrend;
 export type Tweet = {
   __typename?: 'Tweet';
   author?: Maybe<User>;
-  body: Scalars['String'];
-  createdAt: Scalars['String'];
+  body: Scalars['String']['output'];
+  createdAt: Scalars['String']['output'];
   favorites?: Maybe<Array<Favorite>>;
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   retweets?: Maybe<Array<Retweet>>;
   stats?: Maybe<TweetStats>;
-  updatedAt: Scalars['String'];
+  updatedAt: Scalars['String']['output'];
 };
 
 export type TweetStats = {
   __typename?: 'TweetStats';
-  commentCount: Scalars['Int'];
-  favoriteCount: Scalars['Int'];
-  retweetCount: Scalars['Int'];
+  commentCount: Scalars['Int']['output'];
+  favoriteCount: Scalars['Int']['output'];
+  retweetCount: Scalars['Int']['output'];
 };
 
 export type User = {
   __typename?: 'User';
-  avatarUrl: Scalars['String'];
-  coverUrl: Scalars['String'];
-  createdAt: Scalars['String'];
-  deletedAt?: Maybe<Scalars['String']>;
+  avatarUrl: Scalars['String']['output'];
+  coverUrl: Scalars['String']['output'];
+  createdAt: Scalars['String']['output'];
+  deletedAt?: Maybe<Scalars['String']['output']>;
   favorites?: Maybe<Array<Favorite>>;
-  handle: Scalars['String'];
-  id: Scalars['String'];
-  name: Scalars['String'];
+  handle: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
   retweets?: Maybe<Array<Retweet>>;
   stats?: Maybe<UserStats>;
   tweets?: Maybe<Array<Tweet>>;
-  updatedAt: Scalars['String'];
+  updatedAt: Scalars['String']['output'];
 };
 
 export type UserStats = {
   __typename?: 'UserStats';
-  followerCount: Scalars['Int'];
-  followingCount: Scalars['Int'];
-  tweetCount: Scalars['Int'];
+  followerCount: Scalars['Int']['output'];
+  followingCount: Scalars['Int']['output'];
+  tweetCount: Scalars['Int']['output'];
   user: User;
 };
 
@@ -157,7 +154,7 @@ export type ResolverTypeWrapper<T> = Promise<T> | T;
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
+export type Resolver<TResult, TParent = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>, TArgs = Record<PropertyKey, never>> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
@@ -194,21 +191,21 @@ export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, 
   | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
-export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
+export type SubscriptionResolver<TResult, TKey extends string, TParent = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>, TArgs = Record<PropertyKey, never>> =
   | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
-export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
+export type TypeResolveFn<TTypes, TParent = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>> = (
   parent: TParent,
   context: TContext,
   info: GraphQLResolveInfo
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
+export type IsTypeOfResolverFn<T = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
-export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs = {}> = (
+export type DirectiveResolverFn<TResult = Record<PropertyKey, never>, TParent = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>, TArgs = Record<PropertyKey, never>> = (
   next: NextResolverFn<TResult>,
   parent: TParent,
   args: TArgs,
@@ -216,21 +213,32 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
   info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
+
+
+/** Mapping of union types */
+export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
+  Trend:
+    | ( HashtagTrend )
+    | ( TopicTrend )
+  ;
+};
+
+
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   DeletionResult: ResolverTypeWrapper<DeletionResult>;
   Favorite: ResolverTypeWrapper<Favorite>;
   HashtagTrend: ResolverTypeWrapper<HashtagTrend>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
-  Mutation: ResolverTypeWrapper<{}>;
-  Query: ResolverTypeWrapper<{}>;
+  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  Mutation: ResolverTypeWrapper<Record<PropertyKey, never>>;
+  Query: ResolverTypeWrapper<Record<PropertyKey, never>>;
   Retweet: ResolverTypeWrapper<Retweet>;
-  String: ResolverTypeWrapper<Scalars['String']>;
+  String: ResolverTypeWrapper<Scalars['String']['output']>;
   Suggestion: ResolverTypeWrapper<Suggestion>;
   TopicTrend: ResolverTypeWrapper<TopicTrend>;
   TopicTrendQuote: ResolverTypeWrapper<TopicTrendQuote>;
-  Trend: ResolversTypes['HashtagTrend'] | ResolversTypes['TopicTrend'];
+  Trend: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['Trend']>;
   Tweet: ResolverTypeWrapper<Tweet>;
   TweetStats: ResolverTypeWrapper<TweetStats>;
   User: ResolverTypeWrapper<User>;
@@ -239,19 +247,19 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Boolean: Scalars['Boolean'];
+  Boolean: Scalars['Boolean']['output'];
   DeletionResult: DeletionResult;
   Favorite: Favorite;
   HashtagTrend: HashtagTrend;
-  Int: Scalars['Int'];
-  Mutation: {};
-  Query: {};
+  Int: Scalars['Int']['output'];
+  Mutation: Record<PropertyKey, never>;
+  Query: Record<PropertyKey, never>;
   Retweet: Retweet;
-  String: Scalars['String'];
+  String: Scalars['String']['output'];
   Suggestion: Suggestion;
   TopicTrend: TopicTrend;
   TopicTrendQuote: TopicTrendQuote;
-  Trend: ResolversParentTypes['HashtagTrend'] | ResolversParentTypes['TopicTrend'];
+  Trend: ResolversUnionTypes<ResolversParentTypes>['Trend'];
   Tweet: Tweet;
   TweetStats: TweetStats;
   User: User;
@@ -260,7 +268,6 @@ export type ResolversParentTypes = {
 
 export type DeletionResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeletionResult'] = ResolversParentTypes['DeletionResult']> = {
   deleted?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type FavoriteResolvers<ContextType = any, ParentType extends ResolversParentTypes['Favorite'] = ResolversParentTypes['Favorite']> = {
@@ -269,7 +276,6 @@ export type FavoriteResolvers<ContextType = any, ParentType extends ResolversPar
   tweet?: Resolver<Maybe<ResolversTypes['Tweet']>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type HashtagTrendResolvers<ContextType = any, ParentType extends ResolversParentTypes['HashtagTrend'] = ResolversParentTypes['HashtagTrend']> = {
@@ -298,7 +304,6 @@ export type RetweetResolvers<ContextType = any, ParentType extends ResolversPare
   tweet?: Resolver<Maybe<ResolversTypes['Tweet']>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type SuggestionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Suggestion'] = ResolversParentTypes['Suggestion']> = {
@@ -306,7 +311,6 @@ export type SuggestionResolvers<ContextType = any, ParentType extends ResolversP
   handle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   reason?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type TopicTrendResolvers<ContextType = any, ParentType extends ResolversParentTypes['TopicTrend'] = ResolversParentTypes['TopicTrend']> = {
@@ -320,7 +324,6 @@ export type TopicTrendQuoteResolvers<ContextType = any, ParentType extends Resol
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   imageUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type TrendResolvers<ContextType = any, ParentType extends ResolversParentTypes['Trend'] = ResolversParentTypes['Trend']> = {
@@ -336,14 +339,12 @@ export type TweetResolvers<ContextType = any, ParentType extends ResolversParent
   retweets?: Resolver<Maybe<Array<ResolversTypes['Retweet']>>, ParentType, ContextType>;
   stats?: Resolver<Maybe<ResolversTypes['TweetStats']>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type TweetStatsResolvers<ContextType = any, ParentType extends ResolversParentTypes['TweetStats'] = ResolversParentTypes['TweetStats']> = {
   commentCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   favoriteCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   retweetCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -359,7 +360,6 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   stats?: Resolver<Maybe<ResolversTypes['UserStats']>, ParentType, ContextType>;
   tweets?: Resolver<Maybe<Array<ResolversTypes['Tweet']>>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UserStatsResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserStats'] = ResolversParentTypes['UserStats']> = {
@@ -367,7 +367,6 @@ export type UserStatsResolvers<ContextType = any, ParentType extends ResolversPa
   followingCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   tweetCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {

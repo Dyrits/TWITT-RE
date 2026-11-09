@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict'),{createRequire}=require('node:module'),{buildSchema,print}=require('graphql');
+const pluginRequire=createRequire(require.resolve('@graphql-codegen/typescript-react-apollo'));
+const helperPath=pluginRequire.resolve('@graphql-codegen/plugin-helpers');
+const helperRequire=createRequire(helperPath),helpers=pluginRequire('@graphql-codegen/plugin-helpers'),utils=helperRequire('@graphql-tools/utils');
+const version=helperRequire('@graphql-tools/utils/package.json').version;
+assert.ok(Number(version.split('.')[0])>=12,version);
+const schema=buildSchema('directive @key(fields: String!) repeatable on OBJECT | INTERFACE\ntype Product @key(fields:"id") { id: ID! name: String }\ntype Query { product: Product }');
+const document=helpers.getCachedDocumentNodeFromSchema(schema);assert.match(print(document),/type Product/);assert.equal(helpers.getCachedDocumentNodeFromSchema(schema),document);
+const federation=helpers.addFederationReferencesToSchema(schema);assert.ok(federation.transformedSchema.getType('Product').getFields().__resolveReference);
+const plain=helpers.removeFederation(buildSchema('scalar _Any\ntype _Service { sdl: String }\nunion _Entity = Product\ntype Product { id: ID! }\ntype Query { product: Product _service: _Service _entities: [_Entity] }'));
+assert.equal(plain.getQueryType().getFields()._service,undefined);assert.equal(plain.getQueryType().getFields()._entities,undefined);assert.ok(plain.getType('Product'));
+assert.deepEqual(utils.mergeDeep([{a:{one:1}},{a:{two:2}}]),{a:{one:1,two:2}});
+utils.mergeDeep([{},JSON.parse('{"constructor":{"prototype":{"twittPollution":true}},"__proto__":{"twittPollution":true}}')]);assert.equal({}.twittPollution,undefined);assert.equal(Function.prototype.twittPollution,undefined);
+console.log('PASS retained React Apollo plugin helper APIs, schema document cache/federation maps and safe deep merge with patched utilities');

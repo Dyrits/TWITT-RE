@@ -29,7 +29,8 @@
     "test:codegen-config": "node scripts/codegen-config-smoke.cjs",
     "test:nodemon": "node scripts/nodemon-smoke.cjs",
     "test:apollo-http": "node scripts/apollo-http-smoke.cjs",
-    "test:parcel-dev": "node scripts/parcel-dev-smoke.cjs"
+    "test:parcel-dev": "node scripts/parcel-dev-smoke.cjs",
+    "test:codegen-utilities": "node scripts/codegen-utilities-smoke.cjs"
   },
   "workspaces": [
     "client",
@@ -61,7 +62,7 @@
     "shell-quote": "^1.12.0",
     "lodash": "^4.18.1",
     "qs": "^6.16.1",
-    "**/@ardatan/relay-compiler/immutable": "^3.8.4",
-    "**/graphql-config/minimatch": "^11.0.1"
+    "**/graphql-config/minimatch": "^11.0.1",
+    "**/@graphql-codegen/plugin-helpers/@graphql-tools/utils": "^12.1.0"
   }
 }
