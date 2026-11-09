@@ -60,17 +60,6 @@ export type MutationDeleteFavoriteArgs = {
   userId: Scalars['String'];
 };
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  createTweet: Tweet;
-};
-
-
-export type MutationCreateTweetArgs = {
-  body: Scalars['String'];
-  userId: Scalars['String'];
-};
-
 export type Query = {
   __typename?: 'Query';
   currentUser: User;
@@ -165,14 +154,6 @@ export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, handle: string, avatarUrl: string, createdAt: string, updatedAt: string, coverUrl: string, favorites?: Array<{ __typename?: 'Favorite', tweet?: { __typename?: 'Tweet', id: string } | null }> | null, stats?: { __typename?: 'UserStats', tweetCount: number, followerCount: number, followingCount: number } | null }, suggestions?: Array<{ __typename?: 'Suggestion', name: string, handle: string, avatarUrl: string, reason: string }> | null, trends?: Array<{ __typename?: 'HashtagTrend', tweetCount: number, hashtag: string } | { __typename?: 'TopicTrend', tweetCount: number, topic: string, quote?: { __typename?: 'TopicTrendQuote', title: string, imageUrl: string, description: string } | null }> | null };
-
-export type CreateNewTweetMutationVariables = Exact<{
-  userId: Scalars['String'];
-  body: Scalars['String'];
-}>;
-
-
-export type CreateNewTweetMutation = { __typename?: 'Mutation', createTweet: { __typename?: 'Tweet', id: string } };
 
 export type CreateNewTweetMutationVariables = Exact<{
   userId: Scalars['String'];

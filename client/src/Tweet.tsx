@@ -99,7 +99,7 @@ const Tweet: React.FC<TweetProps> = ({
   }
 
   const handleFavoriteClick: React.MouseEventHandler<HTMLButtonElement> = (
-    evt
+    _evt
   ) => {
     if (isFavorited) deleteFavorite();
     else createFavorite();
