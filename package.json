@@ -26,7 +26,8 @@
     "clean": "concurrently yarn:clean-* -c cyan,magenta,yellow",
     "dev": "cd server && yarn dev",
     "test:security": "node scripts/security-smoke.cjs",
-    "test:codegen-config": "node scripts/codegen-config-smoke.cjs"
+    "test:codegen-config": "node scripts/codegen-config-smoke.cjs",
+    "test:nodemon": "node scripts/nodemon-smoke.cjs"
   },
   "workspaces": [
     "client",
