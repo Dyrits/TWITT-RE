@@ -61,3 +61,12 @@ Yarn audit paths fell from 183 findings (3 critical, 115 high) to 179 (0 critica
 ### UUID dependency update (November 2026)
 
 Server IDs now use Node's built-in `crypto.randomUUID()` instead of a separate UUID package. Existing entity prefixes and UUID v4 formatting stay unchanged. A clean frozen Yarn install builds shared, server and client; the compiled GraphQL smoke test checks creation, unique UUID v4 IDs and readback against a scratch JSON database. The direct UUID package and its old type package are removed. Other dependency advisories remain.
+
+
+### Targeted transitive refresh (November 9, 2026)
+
+The Yarn lock now refreshes selected vulnerable transitive packages within their existing declared ranges and major versions. Same-major Lodash 4 and qs 6 resolution floors close findings left by older narrow transitive ranges. The existing TypeScript compiler and declaration versions are retained: an unrestricted dependency refresh introduced type errors and was rejected. Root and server runtime declarations now match the Node 26 LTS version already recorded by Volta.
+
+On Node 26.13.0, a fresh frozen Yarn install with normal postinstall built shared, server and client successfully. `yarn test:security` passed against the newly compiled server and disposable JSON database, including the real GraphQL query/create/read checks, UUID formatting/uniqueness, proxy trust and shell-operator checks, plus Lodash and qs smoke checks. No source business logic, real database, deployment or external service was changed.
+
+Yarn audit fell from 51 to seven distinct advisory IDs, with no new IDs. Path findings fell from 173 (114 high, 47 moderate, 12 low) to 22 (16 high, six moderate). Residual findings remain in Apollo Server 3, older GraphQL tools, Immutable 3 and inherited UUID. This is a partial security update, not a clean audit. The ordinary workspace tests still only print that no tests exist; the dedicated smoke test provides the actual HTTP coverage. Client UI behavior and external integrations are not newly certified by this lock refresh.

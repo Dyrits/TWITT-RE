@@ -11,6 +11,8 @@ const {seedDb} = require('../server/dist/seed.js');
 const {createApolloServer} = require('../server/dist/apollo-server.js');
 const proxyaddr = require('proxy-addr');
 const quote = require('shell-quote');
+const qs = require('qs');
+const lodash = require('lodash');
 (async () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'twitt-security-'));
   const app = express();
@@ -39,6 +41,10 @@ const quote = require('shell-quote');
     assert.equal(trust('::ffff:10.0.0.1'), false);
     assert.equal(trust('::ffff:127.0.0.1'), true);
     assert.throws(() => quote.quote([{op:'x\necho fixture'}]), /invalid.*op/);
+    assert.deepEqual(qs.parse('a[b]=fixture&list[0]=one&list[1]=two'), {a:{b:'fixture'},list:['one','two']});
+    assert.equal(qs.stringify({a:{b:'fixture'}}), 'a%5Bb%5D=fixture');
+    assert.deepEqual(lodash.groupBy([{kind:'one'},{kind:'two'},{kind:'one'}], 'kind').one.length, 2);
+    assert.equal(lodash.get(lodash.merge({}, {a:{b:'fixture'}}), 'a.b'), 'fixture');
     console.log('PASS real GraphQL HTTP query/create/read using scratch JSON database; proxy subnet and shell newline checks');
   } finally {
     if (apollo) await apollo.stop();
