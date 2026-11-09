@@ -5,9 +5,12 @@ import Db from './db';
 import createResolvers from './resolvers';
 import { GRAPHQL_SCHEMA_PATH } from './constants';
 import * as express from 'express';
-import { ApolloServer, ExpressContext, Config } from 'apollo-server-express';
+import { ApolloServer, BaseContext } from '@apollo/server';
+import { GraphQLSchema } from 'graphql';
+import { expressMiddleware } from '@as-integrations/express4';
+import * as cors from 'cors';
 import { Server } from 'http';
-import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 
 const schema = loadSchemaSync(GRAPHQL_SCHEMA_PATH, {
   loaders: [new GraphQLFileLoader()],
@@ -16,9 +19,9 @@ const schema = loadSchemaSync(GRAPHQL_SCHEMA_PATH, {
 async function startApolloServer(
   serverOptions: { httpServer: Server; app: express.Application },
   apolloOptions: {
-    schemaWithResolvers: Exclude<Config<ExpressContext>['schema'], undefined>;
+    schemaWithResolvers: GraphQLSchema;
   }
-): Promise<ApolloServer<ExpressContext>> {
+): Promise<ApolloServer<BaseContext>> {
   const { httpServer, app } = serverOptions;
   const { schemaWithResolvers } = apolloOptions;
   const server = new ApolloServer({
@@ -26,7 +29,7 @@ async function startApolloServer(
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
   await server.start();
-  server.applyMiddleware({ app });
+  app.use('/graphql', cors(), express.json(), expressMiddleware(server));
   return server;
 }
 
@@ -34,7 +37,7 @@ export async function createApolloServer(
   db: Db,
   httpServer: Server,
   app: express.Application
-): Promise<ApolloServer<ExpressContext>> {
+): Promise<ApolloServer<BaseContext>> {
   // Add resolvers to the schema
   const schemaWithResolvers = addResolversToSchema({
     schema,

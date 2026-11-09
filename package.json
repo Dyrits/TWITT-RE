@@ -27,7 +27,8 @@
     "dev": "cd server && yarn dev",
     "test:security": "node scripts/security-smoke.cjs",
     "test:codegen-config": "node scripts/codegen-config-smoke.cjs",
-    "test:nodemon": "node scripts/nodemon-smoke.cjs"
+    "test:nodemon": "node scripts/nodemon-smoke.cjs",
+    "test:apollo-http": "node scripts/apollo-http-smoke.cjs"
   },
   "workspaces": [
     "client",
@@ -45,7 +46,7 @@
     "eslint-plugin-react": "^7.29.4",
     "prettier": "^2.6.0",
     "process": "^0.11.10",
-    "@types/node": "18.15.13"
+    "@types/node": "^26.0.0"
   },
   "engines": {
     "node": "^26.0.0"
